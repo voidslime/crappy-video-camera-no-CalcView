@@ -279,25 +279,6 @@ hook.Add("HUDPaint", "CrapVidCam", function()
 	end
 end)
 
-hook.Add("CalcView", "CrapVidCam", function(ply, pos, ang, fov)
-	if VIDCAM_WRITER then
-		if ply:Health() < 1 or not ply:Alive() then
-			if IsValid(VIDCAM_DATA.DEATH_CAMERA) then
-				pos:Set(VIDCAM_DATA.DEATH_CAMERA:GetPos())
-				ang:Set(VIDCAM_DATA.DEATH_CAMERA:GetAngles())
-			else
-				pos:Set(VIDCAM_DATA.VIEW_POS)
-				ang:Set(VIDCAM_DATA.VIEW_ANG)
-			end
-		end
-		return {
-			origin = pos,
-			angles = ang,
-			fov = fov * VIDCAM_CVARS.FOV:GetFloat()
-		}
-	end
-end)
-
 local defaultCvars = {
 	crapvidcam_holsterstop = 0,
 	crapvidcam_deathdrop = 1,
@@ -350,3 +331,4 @@ hook.Add("PopulateToolMenu", "CrapVidCam.Options", function()
 		form:CheckBox("ONLY record audio (NO video)", "crapvidcam_onlyaudio")
 	end)
 end)
+
